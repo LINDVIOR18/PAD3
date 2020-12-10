@@ -21,7 +21,7 @@ branches:
   only:
     - master
 
-script:
+before_install:
   - mvn -N io.takari:maven:wrapper
   - chmod +x ./mvnw
   - ./mvnw clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
@@ -64,4 +64,4 @@ after_success:
 cache:
   directories:
     - '$HOME/.m2/repository'
-    - '$HOME/.sonar/cache'
+    - "$HOME/.cache"
