@@ -43,6 +43,7 @@ before_install:
 #    heroku container:release web --app $HEROKU_APP
 #  on:
 #    branch: aabhusan
+
 after_success:
 
    #LOGIN
@@ -56,9 +57,9 @@ after_success:
    #VESTA-API
   - export VESTA_API=lindvior2/pad-lab
   - docker build -t $VESTA_API:$COMMIT ./
-  - docker tag $VESTA_API:$COMMIT $VESTA_API:$TAG registry.heroku.com/$HEROKU_APP/web
+  - docker tag $VESTA_API:$TAG registry.heroku.com/$HEROKU_APP/web
   - docker push $VESTA_API
-  - docker push registry.heroku.com/$HEROKU_APP/web;
+  - docker push registry.heroku.com/$HEROKU_APP/web
   - heroku container:release web --app $HEROKU_APP
 
 cache:
