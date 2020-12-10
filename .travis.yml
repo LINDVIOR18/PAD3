@@ -32,7 +32,7 @@ script:
 
 after_success:
 
-   #LOGIN
+   #LOGIN m
   - docker login -u $D_USER -p $D_PASS
 
    #TAG
