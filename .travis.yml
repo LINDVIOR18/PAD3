@@ -25,41 +25,41 @@ before_install:
   - mvn -N io.takari:maven:wrapper
   - chmod +x ./mvnw
   - ./mvnw clean package -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  -
-before_script:
-  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin   #login to dockerhub
-  - curl https://cli-assets.heroku.com/install.sh | sh  #install heroku
-  - docker login --username=$HEROKU_USERNAME --password=$HEROKU_API_KEY registry.heroku.com  #login to registry.heroku.com
+#  -
+#before_script:
+#  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin   #login to dockerhub
+#  - curl https://cli-assets.heroku.com/install.sh | sh  #install heroku
+#  - docker login --username=$HEROKU_USER --password=$HEROKU_API_KEY registry.heroku.com  #login to registry.heroku.com
+#
+#script:
+#  - docker build -t lindvior2/pad-lab:v1 .
+#  - docker tag aabhusan/koora:v1 registry.heroku.com/$HEROKU_APP/web
+#
+#deploy:
+#  provider: script
+#  script:
+#    docker push lindvior2/pad-lab;
+#    docker push registry.heroku.com/$HEROKU_APP/web;
+#    heroku container:release web --app $HEROKU_APP
+#  on:
+#    branch: aabhusan
+after_success:
 
-script:
-  - docker build -t lindvior2/pad-lab:v1 .
-  - docker tag aabhusan/koora:v1 registry.heroku.com/$HEROKU_APP/web
+   #LOGIN
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+  - curl https://cli-assets.heroku.com/install.sh | sh
+  - docker login --username=$HEROKU_USER --password=$HEROKU_API_KEY registry.heroku.com
 
-deploy:
-  provider: script
-  script:
-    docker push lindvior2/pad-lab;
-    docker push registry.heroku.com/$HEROKU_APP/web;
-    heroku container:release web --app $HEROKU_APP
-  on:
-    branch: aabhusan
-#after_success:
-#
-#   #LOGIN
-#  - echo "DOCKER_PASSWORD" | docker login -u "DOCKER_USERNAME" --password-stdin
-#  - curl https://cli-assets.heroku.com/install.sh | sh
-#  - docker login --username=$HEROKU_USER --password=$HEROKU_API_KEY registry.heroku.com
-#
-#  #TAG
-#  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
-#
-#   #VESTA-API
-#  - export VESTA_API=lindvior2/pad-lab
-#  - docker build -t $VESTA_API:$COMMIT ./
-#  - docker tag $VESTA_API:$COMMIT $VESTA_API:$TAG registry.heroku.com/$HEROKU_APP/web
-#  - docker push $VESTA_API
-#  - docker push registry.heroku.com/$HEROKU_APP/web;
-#  - heroku container:release web --app $HEROKU_APP
+  #TAG
+  - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+
+   #VESTA-API
+  - export VESTA_API=lindvior2/pad-lab
+  - docker build -t $VESTA_API:$COMMIT ./
+  - docker tag $VESTA_API:$COMMIT $VESTA_API:$TAG registry.heroku.com/$HEROKU_APP/web
+  - docker push $VESTA_API
+  - docker push registry.heroku.com/$HEROKU_APP/web;
+  - heroku container:release web --app $HEROKU_APP
 
 cache:
   directories:
