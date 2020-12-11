@@ -1,2 +1,0 @@
-ALTER TABLE subject
-ADD COLUMN additional VARCHAR NOT NULL DEFAULT '{}';

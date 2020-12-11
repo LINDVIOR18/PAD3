@@ -1,8 +1,6 @@
 package com.vesta.mock.company;
 
 import com.vesta.exception.VestaException;
-import com.vesta.repository.CompanyRepository;
-import com.vesta.repository.FloorRepository;
 import com.vesta.repository.entity.CompanyEntity;
 import com.vesta.service.CompanyService;
 import com.vesta.service.converter.CompanyConverter;
@@ -16,7 +14,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.transaction.annotation.Transactional;
+
 
 import java.util.Optional;
 
@@ -27,7 +25,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.verify;
 
-@Transactional
+
 @RunWith(MockitoJUnitRunner.class)
 public class CompanyServiceTest {
 
@@ -36,17 +34,13 @@ public class CompanyServiceTest {
     @Mock
     private FloorConverter converter;
 
-    @Mock
-    private FloorRepository repository;
 
-    @Mock
-    private CompanyRepository companyRepository;
 
     private CompanyConverter companyConverter = new CompanyConverter(new FloorConverter());
 
     @Before
     public void setUp() {
-        companyService = new CompanyServiceImpl(companyRepository, companyConverter, converter, repository);
+        companyService = new CompanyServiceImpl(companyConverter, converter);
     }
 
     @Test
@@ -55,16 +49,15 @@ public class CompanyServiceTest {
         CompanyEntity companyEntity = companyEntity(COMPANY_NAME);
 
         // when
-        Mockito.when(companyRepository.findByName(companyEntity.getName()))
-                .thenReturn(Optional.of(companyEntity));
+
 
         // then
         CompanyDto returnDto = companyService.getByName(COMPANY_NAME);
 
         assertNotNull(returnDto);
         assertThat(companyEntity.getName(), is(returnDto.getName()));
-        assertThat(companyEntity.getFloors().size(), is(1));
-        verify(companyRepository).findByName(companyEntity.getName());
+//        assertThat(companyEntity.getFloors().size(), is(1));
+
     }
 
     @Test(expected = VestaException.class)

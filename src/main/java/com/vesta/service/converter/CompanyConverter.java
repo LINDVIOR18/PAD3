@@ -20,7 +20,7 @@ public class CompanyConverter implements Converter<CompanyEntity, CompanyDto> {
         CompanyDto dto = new CompanyDto();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setFloors(entity.getFloors().stream().map(floorConverter::convert).collect(Collectors.toList()));
+//        dto.setFloors(entity.getFloors().stream().map(floorConverter::convert).collect(Collectors.toList()));
         return dto;
     }
 
@@ -29,7 +29,7 @@ public class CompanyConverter implements Converter<CompanyEntity, CompanyDto> {
         CompanyEntity entity = new CompanyEntity();
         entity.setId(dto.getId());
         entity.setName(dto.getName());
-        entity.setFloors(dto.getFloors().stream().map(floorConverter::deconvert).collect(Collectors.toList()));
+//        entity.setFloors(dto.getFloors().stream().map(floorConverter::deconvert).collect(Collectors.toList()));
         return entity;
     }
 }

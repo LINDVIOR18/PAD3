@@ -1,6 +1,5 @@
 package com.vesta.service.converter;
 
-import com.vesta.repository.SubjectTemplateRepository;
 import com.vesta.repository.entity.SubjectEntity;
 import com.vesta.repository.entity.SubjectTemplateEntity;
 import com.vesta.service.dto.SubjectDto;
@@ -14,7 +13,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SubjectConverter implements Converter<SubjectEntity, SubjectDto> {
 
-    private final SubjectTemplateRepository templateRepository;
+
 
     @Override
     public SubjectDto convert(SubjectEntity entity) {
@@ -50,16 +49,7 @@ public class SubjectConverter implements Converter<SubjectEntity, SubjectDto> {
 
     private SubjectTemplateEntity getTemplateEntity(SubjectDto dto) {
 
-        SubjectTemplateEntity subjectTemplateEntity;
-        Optional<SubjectTemplateEntity> templateEntity = templateRepository.getByImage(dto.getImage());
 
-        if (templateEntity.isEmpty()) {
-            subjectTemplateEntity = new SubjectTemplateEntity();
-            subjectTemplateEntity.setImage(dto.getImage());
-            subjectTemplateEntity = templateRepository.save(subjectTemplateEntity);
-        } else {
-            subjectTemplateEntity = templateEntity.get();
-        }
-        return subjectTemplateEntity;
+        return null;
     }
 }

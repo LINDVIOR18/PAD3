@@ -17,7 +17,7 @@ public class CompanyUtilData {
         CompanyEntity companyEntity = new CompanyEntity();
         companyEntity.setId(COMPANY_ID);
         companyEntity.setName(COMPANY_NAME);
-        companyEntity.setFloors(List.of(FloorUtilData.floorEntity()));
+//        companyEntity.setFloors(List.of(FloorUtilData.floorEntity()));
 
         return companyEntity;
     }

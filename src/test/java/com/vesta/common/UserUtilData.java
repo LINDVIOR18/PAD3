@@ -25,7 +25,7 @@ public class UserUtilData {
         userEntity.setPassword(USER_PASSWORD);
         userEntity.setLastName(USER_LAST_NAME);
         userEntity.setFirstName(USER_FIRST_NAME);
-        userEntity.setRoles(Collections.emptyList());
+//        userEntity.setRoles(Collections.emptyList());
 
         return userEntity;
     }
