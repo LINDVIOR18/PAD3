@@ -25,13 +25,13 @@ import static com.vesta.config.security.SecurityConstants.*;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    @Value("${vesta.swagger.host}")
-    private String host;
+//    @Value("${vesta.swagger.host}")
+//    private String host;
 
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
-                .host(host)
+//                (host)
                 .select()
                 .apis(RequestHandlerSelectors
                         .basePackage("com.vesta.controller"))

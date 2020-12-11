@@ -25,8 +25,8 @@ import java.util.Map;
 @Service
 public class EmailServiceImpl implements EmailService {
 
-    @Value("${vesta.base.url}")
-    private String baseUrl;
+//    @Value("${vesta.base.url}")
+//    private String baseUrl;
 
     @Value("${vesta.email.from}")
     private String emailFrom;
@@ -79,7 +79,7 @@ public class EmailServiceImpl implements EmailService {
 
     private String getModelTemplateForResetPassword(String username) {
         Map<String, String> model = new HashMap<>();
-        model.put("base_url", baseUrl);
+//        model.put("base_url", baseUrl);
         model.put("token", tokenService.generatedEmailToken(username).getJwtToken());
         return buildText("ForgotPasswordTemplate.ftl", model);
     }
